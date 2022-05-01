@@ -1,7 +1,9 @@
 # quiz-time
 ## technologies :
-HTML
-CSS
-JS
+**HTML
+**CSS
+**JS
 
-##Deploy: https://alexboagreek-quiz-time.netlify.app/
+## Deploy:
+
+https://alexboagreek-quiz-time.netlify.app/
