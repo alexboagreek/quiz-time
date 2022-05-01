@@ -1,5 +1,5 @@
 # quiz-time
-## technologies :
+## USED technologies :
 **HTML
 **CSS
 **JS
