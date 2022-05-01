@@ -1,8 +1,8 @@
 # quiz-time
 ## USED technologies :
-**HTML
-**CSS
-**JS
+*HTML
+*CSS
+*JS
 
 ## Deploy:
 
