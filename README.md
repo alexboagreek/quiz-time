@@ -1,5 +1,5 @@
 # quiz-time
-# As part of the METHED ITSchool Intensive
+### As part of the METHED ITSchool Intensive
 ## Web-technologies:
 
 1. HTML
