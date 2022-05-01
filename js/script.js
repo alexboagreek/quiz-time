@@ -6,8 +6,7 @@ const title = document.querySelector('.main__title');
 
 
 const getData = () => {
-    return fetch('db/quiz_db.json').then(response => response.json());
-       
+    return fetch('db/quiz_db.json').then(response => response.json());      
 };
 
 const showElem = (elem) => {
@@ -21,15 +20,14 @@ const showElem = (elem) => {
 
         if(opacity < 1) {
             requestAnimationFrame(animation);
-        };
-
-        requestAnimationFrame(animation);
-
-    }
-}
+        }
+    };
+    requestAnimationFrame(animation);
+};
 
 const hideElem = (elem, callback) => {
     let opacity = getComputedStyle(elem).getPropertyValue('opacity');
+
     const animation = () => {
         opacity -= 0.05;
         elem.style.opacity = opacity;
@@ -77,7 +75,7 @@ const renderTheme = (themes) => {
     list.append(li);
 
     buttons.push(button);
-   }
+}
 
    return buttons;
 
@@ -92,19 +90,26 @@ const shuffle = (array) => {
     return newArray;
 }
 
+
+
+const saveResult = (result, id) => {
+    localStorage.setItem(id, result);
+};
+
+const loadResult = (id) => localStorage.getItem(id);
+
 const createKeyAnswers = data => {
     const keys = [];
 
     for (let i = 0; i < data.answers.length; i++) {
         if (data.type === 'radio') {
-            keys.push([data.answers[i], !i]);
+            keys.push([data.answers[i], !i])
         } else {
             keys.push([data.answers[i], i < data.correct]);
         }
     }
-
     return shuffle(keys);
-}
+};
 
 const createAnswer = data => {
     const type = data.type;
@@ -119,11 +124,8 @@ const createAnswer = data => {
         input.name = 'answer';
         input.className = `answer__${type}`;
         input.value = i;
-
         const text = document.createTextNode(item[0]);
-
         label.append(input, text);
- 
         return label;
     });
 
@@ -161,26 +163,16 @@ const showResult = (result, quiz) => {
     const button = document.createElement('button');
     button.className = 'main__btn result__return';
     button.textContent = 'Вернуться к списку квизов';
-
     block.append(button);
     main.append(block);
 
+    showElem(block);
+
     button.addEventListener('click', () =>{
-        hideElem(block, () => {
-            showElem(title);
-            showElem(selection);
-        });
-    })
+        hideElem(block, initQuiz);
+    });
 
 };
-
-const saveResult = (result, id) => {
-    localStorage.setItem(id, result);
-};
-
-const loadResult = (id) => localStorage.getItem(id);
-
-
 
 const renderQuiz = (quiz) => {
   
@@ -188,7 +180,7 @@ const renderQuiz = (quiz) => {
     questionBox.className = 'main__box main__box-question';
 
     hideElem(title);
-    hideElem*(selection, () => {
+    hideElem(selection, () => {
         showElem(questionBox);
         main.append(questionBox);
     });
@@ -235,7 +227,6 @@ const renderQuiz = (quiz) => {
                 if (input.checked) ok = true;
                 return input.checked ? input.value : false;
             });
-            console.log(answer);
 
             if (ok) {
 
@@ -262,7 +253,7 @@ const renderQuiz = (quiz) => {
                     form.classList.remove('main__form-question_error');
                 }, 1000);
             }
-        })
+        });
 
     };
     showQuestion();
@@ -283,10 +274,12 @@ const addClick = (buttons, data) => {
 
 const initQuiz = async () => {
 
+    showElem(title);
+    showElem(selection);
+
     const data = await getData();
 
     const buttons = renderTheme(data);
-
     addClick(buttons, data);
 
 };
